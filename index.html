@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donda Sai Siddhu - AI/ML Engineer</title>
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons via CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Google Fonts for 'sans' family -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'greyish-white': '#F5F5F5',
+                    },
+                }
+            }
+        }
+
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+    </script>
+    
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hover-scale {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hover-scale:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background-color: #dbeafe;
+        }
+
+        .timeline-container-edu::before {
+            background-color: #bbf7d0;
+        }
+
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: #3b82f6;
+            width: 0%;
+            z-index: 1000;
+            transition: width 0.3s ease;
+        }
+
+        /* Mobile-specific styles */
+        @media (max-width: 640px) {
+            #navbar .text-2xl {
+                font-size: 1.5rem;
+            }
+            nav a {
+                font-size: 0.9rem;
+            }
+            #home h1 {
+                font-size: 2rem;
+            }
+            #home p {
+                font-size: 1rem;
+            }
+            #home .px-8 {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            #home .w-72, #home .w-96 {
+                width: 60vw;
+                height: 60vw;
+            }
+            #home .w-64, #home .w-80 {
+                width: 50vw;
+                height: 50vw;
+            }
+            .grid-cols-4 {
+                grid-template-columns: 1fr 1fr;
+            }
+            .timeline-container, .timeline-container-edu {
+                padding-left: 0;
+                padding-right: 0;
+            }
+            .timeline-container div, .timeline-container-edu div {
+                width: 100% !important;
+                text-align: center !important;
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+            }
+            .timeline-container::before, .timeline-container-edu::before {
+                left: 10px;
+                transform: none;
+            }
+            #projects-grid {
+                grid-template-columns: 1fr;
+            }
+            #achievements-grid {
+                grid-template-columns: 1fr;
+            }
+            #contact .max-w-xl {
+                max-width: 100%;
+                padding: 1rem;
+            }
+            #contact input, #contact textarea {
+                font-size: 0.9rem;
+            }
+            footer .h-6, footer .w-6 {
+                height: 1.25rem;
+                width: 1.25rem;
+            }
+        }
+
+        @media (min-width: 641px) and (max-width: 1024px) {
+            #home .md:w-1/2 {
+                width: 100%;
+            }
+            #home .flex-row {
+                flex-direction: column;
+            }
+            .grid-cols-4 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            #projects-grid {
+                grid-template-columns: 1fr;
+            }
+            #contact .max-w-xl {
+                max-width: 90%;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-white text-black font-sans leading-relaxed">
+    <div id="progress-bar"></div>
+
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm shadow-md transition-all duration-300">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#home" class="text-2xl font-bold text-blue-600 hover:text-blue-800 transition-colors">DONDA SAI SIDDHU</a>
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="#about" class="text-gray-600 hover:text-blue-600 transition-colors hover:underline">About</a>
+                <a href="#skills" class="text-gray-600 hover:text-blue-600 transition-colors hover:underline">Skills</a>
+                <a href="#experience" class="text-gray-600 hover:text-blue-600 transition-colors hover:underline">Experience</a>
+                <a href="#projects" class="text-gray-600 hover:text-blue-600 transition-colors hover:underline">Projects</a>
+                <a href="#education" class="text-gray-600 hover:text-blue-600 transition-colors hover:underline">Education</a>
+                <a href="#contact" class="text-gray-600 hover:text-blue-600 transition-colors hover:underline">Contact</a>
+            </nav>
+            <div class="md:hidden">
+                <button id="menu-toggle-btn" class="p-2 rounded-full text-gray-600 hover:bg-gray-100 transition-colors">
+                    <i data-lucide="menu" id="menu-open-icon"></i>
+                    <i data-lucide="x" id="menu-close-icon" class="hidden"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white absolute top-full left-0 w-full shadow-lg">
+            <div class="container mx-auto px-6 py-4 flex flex-col space-y-4">
+                <a href="#about" class="mobile-nav-link text-gray-600 hover:text-blue-600 transition-colors hover:underline">About</a>
+                <a href="#skills" class="mobile-nav-link text-gray-600 hover:text-blue-600 transition-colors hover:underline">Skills</a>
+                <a href="#experience" class="mobile-nav-link text-gray-600 hover:text-blue-600 transition-colors hover:underline">Experience</a>
+                <a href="#projects" class="mobile-nav-link text-gray-600 hover:text-blue-600 transition-colors hover:underline">Projects</a>
+                <a href="#education" class="mobile-nav-link text-gray-600 hover:text-blue-600 transition-colors hover:underline">Education</a>
+                <a href="#contact" class="mobile-nav-link text-gray-600 hover:text-blue-600 transition-colors hover:underline">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-20">
+        <section id="home" class="container mx-auto px-6 py-24 md:py-32 flex flex-col md:flex-row items-center text-center md:text-left">
+            <div class="md:w-1/2">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-black leading-tight animate-on-scroll fade-in-left">
+                    AI/ML Engineer
+                </h1>
+                <p class="mt-6 text-lg text-gray-600 max-w-xl mx-auto md:mx-0 animate-on-scroll fade-in-left delay-200">
+                    Currently teaching machines to replace me, but nicer...
+                </p>
+                <div class="mt-8 flex justify-center md:justify-start space-x-4 animate-on-scroll fade-in-left delay-400">
+                    <a href="#contact" class="px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition-all hover-scale">
+                        Get in Touch
+                    </a>
+                    <a href="Donda_Sai_Siddhu_AI_Engineer.pdf" download class="px-8 py-3 bg-white border border-gray-300 text-black font-semibold rounded-lg shadow-lg hover:bg-gray-100 hover-scale flex items-center">
+                        <i data-lucide="download" class="mr-2 h-5 w-5"></i>
+                        Resume
+                    </a>
+                </div>
+                <div class="mt-8 flex justify-center md:justify-start space-x-6 animate-on-scroll fade-in-left delay-600">
+                    <a href="https://linkedin.com/in/siddhu-donda" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-blue-600 transition-colors hover:scale-110"><i data-lucide="linkedin" class="h-7 w-7"></i></a>
+                    <a href="https://github.com/siddhudonda" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-blue-600 transition-colors hover:scale-110"><i data-lucide="github" class="h-7 w-7"></i></a>
+                    <a href="mailto:siddharthsiddhuw7@gmail.com" class="text-gray-500 hover:text-blue-600 transition-colors hover:scale-110"><i data-lucide="mail" class="h-7 w-7"></i></a>
+                </div>
+            </div>
+            <div class="md:w-1/2 mt-12 md:mt-0 flex justify-center animate-on-scroll fade-in-right">
+                <div class="w-72 h-72 md:w-96 md:h-96 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full relative flex items-center justify-center shadow-2xl hover-scale">
+                    <img src="siddhu_gol (1).jpg" alt="Donda Sai Siddhu" class="w-64 h-64 md:w-80 md:h-80 rounded-full object-cover border-4 border-white" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-64 h-64 md:w-80 md:h-80 bg-white rounded-full" style="display: none;"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="py-20 bg-greyish-white">
+            <div class="container mx-auto px-6">
+                <h2 class="animate-on-scroll fade-in-up text-3xl md:text-4xl font-bold text-center text-black mb-12">About Me</h2>
+                <div class="animate-on-scroll fade-in-up max-w-3xl mx-auto text-center text-lg text-gray-600">
+                    <p>
+                        AI/ML Engineer with 1+ years of real-time experience in fine-tuning Large Language Models (LLMs) and building Retrieval-Augmented Generation (RAG) agents. Passionate about solving real-world problems using machine learning and deep learning. Proven expertise in delivering scalable AI solutions in agriculture, fraud detection, natural language understanding, and LLM applications.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="animate-on-scroll fade-in-up text-3xl md:text-4xl font-bold text-center text-black mb-12">Technical Skills</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Skills will be injected by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="py-20 bg-greyish-white">
+            <div class="container mx-auto px-6">
+                <h2 class="animate-on-scroll fade-in-up text-3xl md:text-4xl font-bold text-center text-black mb-12">Work Experience</h2>
+                <div class="relative max-w-3xl mx-auto timeline-container">
+                    <!-- Experience items will be injected by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="animate-on-scroll fade-in-up text-3xl md:text-4xl font-bold text-center text-black mb-12">Projects</h2>
+                <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Projects will be injected by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <section id="education" class="py-20 bg-greyish-white">
+            <div class="container mx-auto px-6">
+                <h2 class="animate-on-scroll fade-in-up text-3xl md:text-4xl font-bold text-center text-black mb-12">Education</h2>
+                <div class="relative max-w-3xl mx-auto timeline-container-edu">
+                    <!-- Education items will be injected by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <section id="achievements" class="py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="animate-on-scroll fade-in-up text-3xl md:text-4xl font-bold text-center text-black mb-12">Achievements & Publications</h2>
+                <div id="achievements-grid" class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Achievements will be injected by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-20 bg-greyish-white">
+            <div class="container mx-auto px-6">
+                <h2 class="animate-on-scroll fade-in-up text-3xl md:text-4xl font-bold text-center text-black mb-12">Contact Me</h2>
+                <div class="animate-on-scroll fade-in-up max-w-xl mx-auto bg-white p-8 rounded-lg shadow-lg border border-gray-200 hover:shadow-2xl transition-shadow">
+                    <form id="contact-form" action="https://formspree.io/f/manjlzqd" method="POST">
+                        <div class="mb-6">
+                            <label for="name" class="block mb-2 text-sm font-medium text-black">Your Name</label>
+                            <input type="text" id="name" name="name" class="bg-gray-100 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 transition-all hover:border-blue-600" required />
+                        </div>
+                        <div class="mb-6">
+                            <label for="email" class="block mb-2 text-sm font-medium text-black">Your Email</label>
+                            <input type="email" id="email" name="email" class="bg-gray-100 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 transition-all hover:border-blue-600" required />
+                        </div>
+                        <div class="mb-6">
+                            <label for="message" class="block mb-2 text-sm font-medium text-black">Your Message</label>
+                            <textarea id="message" name="message" rows="4" class="bg-gray-100 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 transition-all hover:border-blue-600" required></textarea>
+                        </div>
+                        <button type="submit" class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center hover-scale">Send Message</button>
+                        <p id="form-status" class="mt-4 text-center text-sm text-gray-500"></p>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-white py-8 border-t border-gray-200">
+        <div class="container mx-auto px-6 text-center">
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="https://linkedin.com/in/siddhu-donda" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-blue-600 transition-colors hover:scale-110"><i data-lucide="linkedin" class="h-6 w-6"></i></a>
+                <a href="https://github.com/siddhudonda" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-blue-600 transition-colors hover:scale-110"><i data-lucide="github" class="h-6 w-6"></i></a>
+                <a href="mailto:siddharthsiddhuw7@gmail.com" class="text-gray-500 hover:text-blue-600 transition-colors hover:scale-110"><i data-lucide="mail" class="h-6 w-6"></i></a>
+            </div>
+            <p class="text-gray-500 text-sm">
+                © <span id="copyright-year"></span> Donda Sai Siddhu. All Rights Reserved.
+            </p>
+            <p class="text-gray-400 text-xs mt-2">
+                Built with HTML, Tailwind CSS, and JavaScript.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const skillsData = {
+                "Languages": ["Python", "Java"],
+                "Databases": ["SQL", "PL/SQL"],
+                "Libraries & Frameworks": ["NumPy", "Pandas", "Scikit-learn", "TensorFlow", "Keras", "PyTorch", "JAX", "Hugging Face", "LangChain", "LangGraph", "DSPy", "LlamaIndex", "Haystack"],
+                "Machine Learning": ["Regression Models", "XGBoost", "Reranking", "RL", "LORA", "GRPO"],
+                "Deep Learning": ["Vision Transformers", "LLMs", "Prompt Engineering"],
+                "Vector DBS": ["FAISS", "Pinecone", "ChromaDB", "Weaviate", "Vertex AI Vector Search"],
+                "Tools": ["Git", "Docker", "Flask", "FastAPI", "Gradio", "MCP", "n8n"],
+                "Cloud": ["GCP (BigQuery, Vertex AI)", "AzureML", "Gemini API"]
+            };
+
+            const experienceData = [
+                { role: "Machine Learning Engineer", company: "Farminno-Tech Pvt Ltd", date: "Feb 2023 - Dec 2024", description: ["Developed and deployed real-time wildlife and insect detection models on Raspberry Pi 4 devices to enhance agricultural protection systems.", "Created an AI-based deterrent mechanism that triggers alarms and notifications upon threat detection; contributed to patent applications and DST funding proposals.", "Collaborated with hardware and firmware teams to optimize detection latency and reduce false positives in field conditions."]},
+                { role: "Data Science Intern", company: "Oolook", date: "Sept 2023 - Dec 2023", description: ["Built scalable scraping pipelines for Instagram, Facebook, and LinkedIn using Python and Selenium to gather gym and fitness influencer data.", "Performed advanced analytics on engagement metrics, follower-to-post ratios, and growth trends to identify high-performing profiles.", "Created visual dashboards and reports to help stakeholders make data-driven marketing decisions."]}
+            ];
+
+            const projectsData = [
+                { title: "Research QA System using LLM + Vector Embeddings", description: "Built a scalable QA system for scientific research by embedding 250+ academic PDFs. Designed a hybrid retrieval architecture and achieved an 85% BERTScore for domain-specific QA performance.", tags: ["LLM", "Vector DB", "GCP", "Pinecone", "Mistral", "Qwen-3"] },
+                { title: "Fine-tuning DeepSeek-R1-Distill-LLaMA-8B", description: "Fine-tuned the LLaMA-8B model for medical chain-of-thought reasoning using Hugging Face and Unsloth, improving accuracy over baseline models.", tags: ["Fine-Tuning", "LLaMA-8B", "Hugging Face", "Unsloth", "Medical AI"] },
+                { title: "Chat With Any PDF using RAG", description: "Developed a RAG-based PDF QA application with a Gradio UI, using FAISS for vector indexing and Google Gen AI for response generation.", tags: ["RAG", "Gradio", "FAISS", "Google Gen AI", "PDF QA"] },
+                { title: "LLAMA 3.1 8B Fine-Tuning Project", description: "Fine-tuned Meta's LLAMA 3.1 8B model using Unsloth and LORA, focusing on improving instruction-following and factual reasoning for medical and QA data.", tags: ["LLAMA 3.1", "Fine-Tuning", "Unsloth", "LORA", "Multilingual"] }
+            ];
+
+            const educationData = [
+                { institution: "GITAM University, Visakhapatnam", degree: "B.Tech in Computer Science and Engineering", date: "2020 - 2024", grade: "CGPA: 7.75/10" },
+                { institution: "FIITJEE College, Visakhapatnam", degree: "Intermediate Education", date: "2018 - 2020", grade: "" }
+            ];
+
+            const achievementsData = [
+                { icon: 'award', color: 'yellow', title: '1st Prize - Machine Learning Hackathon', description: 'Awarded 1st place among 150+ participants for designing a highly accurate ML model to predict customer churn.'},
+                { icon: 'briefcase', color: 'blue', title: 'Patent: AI Wildlife Deterrent System', description: 'Filed a patent for an AI-powered wildlife deterrent system with real-time threat detection, supported by DST funding.'},
+                { icon: 'graduation-cap', color: 'green', title: 'Publication: Click Fraud Detection', description: 'Published "Click Fraud Detection in Online Ads using Ensemble Models" in AI-PTIS 2024.', span: 'md:col-span-2' }
+            ];
+
+            function renderSkills() {
+                const container = document.querySelector('#skills .grid');
+                let html = '';
+                for (const [category, skills] of Object.entries(skillsData)) {
+                    html += `
+                        <div class="animate-on-scroll fade-in-up bg-white p-6 rounded-lg shadow-lg border border-gray-200 hover-scale">
+                            <h3 class="text-xl font-bold text-blue-600 mb-4">${category}</h3>
+                            <div class="flex flex-wrap gap-2">
+                                ${skills.map(skill => `<span class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full hover:bg-blue-200 transition-colors">${skill}</span>`).join('')}
+                            </div>
+                        </div>`;
+                }
+                container.innerHTML = html;
+            }
+
+            function renderExperience() {
+                const container = document.querySelector('#experience .timeline-container');
+                let html = '';
+                experienceData.forEach((exp, index) => {
+                    const alignmentClass = index % 2 === 0 ? 'pr-8 text-right' : 'pl-8 text-left';
+                    const contentAlignment = index % 2 === 0 ? 'pl-8' : 'pr-8';
+                    html += `
+                        <div class="animate-on-scroll ${index % 2 === 0 ? 'fade-in-right' : 'fade-in-left'} mb-16 flex items-center w-full">
+                            <div class="w-1/2 ${alignmentClass}">
+                                <p class="text-gray-500">${exp.date}</p>
+                                <h3 class="text-2xl font-bold text-blue-600 mt-1">${exp.role}</h3>
+                                <p class="text-lg font-semibold text-black">${exp.company}</p>
+                            </div>
+                            <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-blue-600 rounded-full border-4 border-white flex items-center justify-center hover:bg-blue-700 transition-colors">
+                                <i data-lucide="briefcase" class="text-white h-4 w-4"></i>
+                            </div>
+                            <div class="w-1/2 ${contentAlignment}">
+                                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition-shadow">
+                                    <ul class="space-y-2 text-gray-600">
+                                        ${exp.description.map(item => `
+                                            <li class="flex">
+                                                <i data-lucide="chevrons-right" class="text-blue-500 mr-2 mt-1 flex-shrink-0 h-4 w-4"></i>
+                                                <span>${item}</span>
+                                            </li>`).join('')}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>`;
+                });
+                container.innerHTML = html;
+            }
+
+            function renderProjects() {
+                const container = document.getElementById('projects-grid');
+                let html = '';
+                projectsData.forEach(project => {
+                    html += `
+                    <div class="animate-on-scroll fade-in-up bg-white rounded-lg shadow-xl overflow-hidden transform hover:-translate-y-2 transition-all duration-300 border border-gray-200 hover-scale">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-black mb-3">${project.title}</h3>
+                            <p class="text-gray-600 mb-4">${project.description}</p>
+                            <div class="flex flex-wrap gap-2">
+                                ${project.tags.map(tag => `<span class="bg-purple-100 text-purple-800 text-sm font-medium px-3 py-1 rounded-full hover:bg-purple-200 transition-colors">${tag}</span>`).join('')}
+                            </div>
+                        </div>
+                    </div>`;
+                });
+                container.innerHTML = html;
+            }
+
+            function renderEducation() {
+                const container = document.querySelector('#education .timeline-container-edu');
+                let html = '';
+                educationData.forEach((edu, index) => {
+                    const alignmentClass = index % 2 === 0 ? 'pr-8 text-right' : 'pl-8 text-left';
+                    html += `
+                    <div class="animate-on-scroll ${index % 2 === 0 ? 'fade-in-right' : 'fade-in-left'} mb-12 flex items-center w-full">
+                        <div class="w-1/2 ${alignmentClass}">
+                            <p class="text-gray-500">${edu.date}</p>
+                            <h3 class="text-xl font-bold text-green-600 mt-1">${edu.institution}</h3>
+                            <p class="text-lg text-black">${edu.degree}</p>
+                            ${edu.grade ? `<p class="text-md text-gray-500">${edu.grade}</p>` : ''}
+                        </div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-green-600 rounded-full border-4 border-white flex items-center justify-center hover:bg-green-700 transition-colors">
+                            <i data-lucide="graduation-cap" class="text-white h-4 w-4"></i>
+                        </div>
+                        <div class="w-1/2 ${index % 2 === 0 ? 'pl-8' : 'pr-8'}"></div>
+                    </div>`;
+                });
+                container.innerHTML = html;
+            }
+
+            function renderAchievements() {
+                const container = document.getElementById('achievements-grid');
+                let html = '';
+                achievementsData.forEach((ach, index) => {
+                    html += `
+                    <div class="animate-on-scroll ${index % 2 === 0 ? 'fade-in-left' : 'fade-in-right'} bg-white p-6 rounded-lg shadow-lg ${ach.span || ''} border border-gray-200 hover-scale">
+                        <div class="flex items-center mb-4">
+                            <i data-lucide="${ach.icon}" class="text-${ach.color}-500 mr-4 h-8 w-8"></i>
+                            <h3 class="text-xl font-bold text-black">${ach.title}</h3>
+                        </div>
+                        <p class="text-gray-600">${ach.description}</p>
+                    </div>`;
+                });
+                container.innerHTML = html;
+            }
+
+            function setupMobileMenu() {
+                const menuToggleBtn = document.getElementById('menu-toggle-btn');
+                const mobileMenu = document.getElementById('mobile-menu');
+                const menuOpenIcon = document.getElementById('menu-open-icon');
+                const menuCloseIcon = document.getElementById('menu-close-icon');
+                const navLinks = document.querySelectorAll('.mobile-nav-link');
+
+                function toggleMenu() {
+                    mobileMenu.classList.toggle('hidden');
+                    menuOpenIcon.classList.toggle('hidden');
+                    menuCloseIcon.classList.toggle('hidden');
+                    mobileMenu.classList.add('transition-all', 'duration-300');
+                    mobileMenu.classList.toggle('opacity-0', !mobileMenu.classList.contains('hidden'));
+                }
+
+                menuToggleBtn.addEventListener('click', toggleMenu);
+                navLinks.forEach(link => link.addEventListener('click', toggleMenu));
+            }
+
+            function setupScrollAnimations() {
+                const animatedElements = document.querySelectorAll('.animate-on-scroll');
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                animatedElements.forEach(el => observer.observe(el));
+            }
+
+            function setupScrollProgress() {
+                const progressBar = document.getElementById('progress-bar');
+                window.addEventListener('scroll', () => {
+                    const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+                    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                    const scrolled = (winScroll / height) * 100;
+                    progressBar.style.width = scrolled + '%';
+                });
+            }
+
+            function setupContactForm() {
+                const form = document.getElementById('contact-form');
+                form.addEventListener('submit', async (event) => {
+                    event.preventDefault();
+                    const status = document.getElementById('form-status');
+                    const data = new FormData(form);
+                    try {
+                        const response = await fetch(form.action, {
+                            method: form.method,
+                            body: data,
+                            headers: { 'Accept': 'application/json' }
+                        });
+                        if (response.ok) {
+                            status.textContent = "Thanks for your message!";
+                            form.reset();
+                        } else {
+                            const data = await response.json();
+                            status.textContent = data.errors ? data.errors.map(error => error.message).join(", ") : "Oops! There was a problem submitting your form";
+                        }
+                    } catch (error) {
+                        status.textContent = "Oops! There was a problem submitting your form";
+                    }
+                });
+            }
+
+            function init() {
+                renderSkills();
+                renderExperience();
+                renderProjects();
+                renderEducation();
+                renderAchievements();
+                setupMobileMenu();
+                setupScrollAnimations();
+                setupScrollProgress();
+                setupContactForm();
+                document.getElementById('copyright-year').textContent = new Date().getFullYear();
+                lucide.createIcons();
+            }
+
+            init();
+        });
+    </script>
+</body>
+</html>
